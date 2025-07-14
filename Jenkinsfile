@@ -32,5 +32,16 @@ pipeline {
                 echo "Deployment"
             }
         }*/
+
+        stage('Build') {
+            steps {
+                sh 'npm run build'
+            }
+        }
+    }
+
+    post {
+        echo "Cleaning up work space"
+        deleteDir()
     }
 }
