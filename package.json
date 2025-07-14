@@ -5,7 +5,7 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "tsc"
+    "build": "sh zip -r ./* --exclude=.git --exclude=.zip"
   },
   "author": "SteveW",
   "license": "Apache-2.0",
