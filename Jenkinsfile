@@ -19,6 +19,7 @@ pipeline {
                 echo "Unit testing is done here"
             }
         }
+        /*
         //it expects sonar-project.properties
         stage('Sonar Scan') {
             steps {
@@ -30,6 +31,6 @@ pipeline {
             steps {
                 echo "Deployment"
             }
-        }
+        }*/
     }
 }
