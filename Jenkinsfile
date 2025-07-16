@@ -79,8 +79,10 @@ pipeline {
                 steps {
                     script {
                         withCredentials([usernamePassword(credentialsId: 'docker-cred', passwordVariable: 'DOCKER_PASSWORD', usernameVariable: 'DOCKER_USERNAME')]) {
+                        sh """
                         docker build -t dasaridevops/catalogue:1.0.0 .
                         docker push dasaridevops/catalogue:1.0.0
+                        """
                         }
                     }
                 }
