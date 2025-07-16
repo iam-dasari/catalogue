@@ -14,10 +14,13 @@ pipeline {
                     echo "Trying to receive the version"
                     try {
                         echo "Trying to receive the version from try......"
-                        def packageJson = readFile file: 'package.json'
-                        echo "${packageJson}"
-                        packageVersion = packageJson.version
-                        echo "version: ${packageVersion}"
+                        // Read the JSON file
+                        def json = readJSON file: 'package.json'
+                        // Extract version
+                        def appVersion = json.version
+                        echo "Extracted app version: ${appVersion}"
+                        // Save to env variable if needed
+                        env.APP_VERSION = appVersion
                     } catch(Exception ex) {
                         echo "Catching the exception ........";
                     }
