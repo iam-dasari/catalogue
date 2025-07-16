@@ -13,6 +13,7 @@ pipeline {
                 script{
                     echo "Trying to receive the version"
                     try {
+                        echo "Trying to receive the version from try......"
                         def packageJson = readJSON file: 'package.json'
                         echo "${packageJson}"
                         packageVersion = packageJson.version
