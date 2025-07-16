@@ -14,6 +14,7 @@ pipeline {
                     echo "Trying to receive the version"
                     try {
                         def packageJson = readJSON file: 'package.json'
+                        echo "${packageJson}"
                         packageVersion = packageJson.version
                         echo "version: ${packageVersion}"
                     } catch(Exception ex) {
