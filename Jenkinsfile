@@ -8,30 +8,22 @@ pipeline {
     stages {
         stage('Install Dependencies') {
             steps {
-                sh 'pwd'
-                sh 'ls -lrt'
                 sh 'npm install'
             }
         }
 
         stage('Unit Test') {
             steps {
-                echo "Unit testing is done here"
+                sh 'npm test'
             }
         }
-        /*
-        //it expects sonar-project.properties
+        
+        //it expects sonar-project.properties. credentials are configured in EC2 itself
         stage('Sonar Scan') {
             steps {
                 sh 'sonar-scanner'
             }
         }
-
-        stage('deploy') {
-            steps {
-                echo "Deployment"
-            }
-        }*/
 
         stage('Build') {
             steps {
