@@ -77,9 +77,11 @@ pipeline {
 
             stage("Build Image & Push to DockerHub") {
                 steps {
-                    withCredentials([usernamePassword(credentialsId: 'docker-cred', passwordVariable: 'DOCKER_PASSWORD', usernameVariable: 'DOCKER_USERNAME')]) {
+                    script {
+                        withCredentials([usernamePassword(credentialsId: 'docker-cred', passwordVariable: 'DOCKER_PASSWORD', usernameVariable: 'DOCKER_USERNAME')]) {
                         docker build -t dasaridevops/catalogue:1.0.0 .
                         docker push dasaridevops/catalogue:1.0.0
+                        }
                     }
                 }
             }
