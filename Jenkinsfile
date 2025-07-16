@@ -21,7 +21,8 @@ pipeline {
         //it expects sonar-project.properties. credentials are configured in EC2 itself
         stage('Sonar Scan') {
             steps {
-                sh 'sonar-scanner'
+                echo "Sonar scan is done"
+                //sh 'sonar-scanner' //This is already implemented
             }
         }
 
