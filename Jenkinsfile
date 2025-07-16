@@ -8,18 +8,13 @@ pipeline {
     }
 
     stages {
-        stage('Get version'){
+        /* stage('Get version'){
             steps{
                 script{
-                    echo "Trying to receive the version"
                     try {
-                        echo "Trying to receive the version from try......"
-                        // Read the JSON file
                         def json = readJSON file: 'package.json'
-                        // Extract version
                         def appVersion = json.version
                         echo "Extracted app version: ${appVersion}"
-                        // Save to env variable if needed
                         env.APP_VERSION = appVersion
                     } catch(Exception ex) {
                         echo "Catching the exception ........";
@@ -31,7 +26,7 @@ pipeline {
 
                 }
             }
-        }  
+        }   */
 
         stage('Install Dependencies') {
             steps {
@@ -59,7 +54,7 @@ pipeline {
             }
         }
 
-         //install pipeline utility steps plugin, if not installed
+         /* //install pipeline utility steps plugin, if not installed
             stage('Publish Artifact') {
                 steps {
                     nexusArtifactUploader(
@@ -77,6 +72,19 @@ pipeline {
                             type: 'zip']
                         ]
                     )
+                }
+            } */
+
+            stage("Build Image & Push to DockerHub") {
+                steps {
+                    sh """
+                    docker build -t dasaridevops/catalogue:1.0.0 .
+                    """
+                    withCredentials([usernamePassword(credentialsId: 'docker-cred', passwordVariable: 'DOCKER_PASSWORD', usernameVariable: 'DOCKER_USERNAME')]) {
+                        sh """
+                        docker push dasaridevops/catalogue:1.0.0
+                        """
+                    }
                 }
             }
     }
