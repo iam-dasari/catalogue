@@ -12,9 +12,18 @@ pipeline {
             steps{
                 script{
                     echo "Trying to receive the version"
-                    def packageJson = readJSON(file: 'package.json')
-                    packageVersion = packageJson.version
-                    echo "version: ${packageVersion}"
+                    try {
+                        def packageJson = readJSON(file: 'package.json')
+                        packageVersion = packageJson.version
+                        echo "version: ${packageVersion}"
+                    } catch(Exception ex) {
+                        echo "Catching the exception ........";
+                    }
+
+                    finally {
+                        echo "This is finally block ........";
+                    }
+
                 }
             }
         }  
